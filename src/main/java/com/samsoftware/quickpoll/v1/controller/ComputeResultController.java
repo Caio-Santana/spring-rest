@@ -1,4 +1,4 @@
-package com.samsoftware.quickpoll.controller;
+package com.samsoftware.quickpoll.v1.controller;
 
 import com.samsoftware.quickpoll.domain.Vote;
 import com.samsoftware.quickpoll.dto.OptionCount;
@@ -7,6 +7,7 @@ import com.samsoftware.quickpoll.repository.VoteRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,7 +15,8 @@ import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.Map;
 
-@RestController
+@RestController("computeResultControllerV1")
+@RequestMapping("/v1")
 public class ComputeResultController {
 
     @Inject

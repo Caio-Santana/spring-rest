@@ -1,4 +1,4 @@
-package com.samsoftware.quickpoll.controller;
+package com.samsoftware.quickpoll.v2.controller;
 
 import com.samsoftware.quickpoll.domain.Vote;
 import com.samsoftware.quickpoll.repository.VoteRepository;
@@ -10,7 +10,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.inject.Inject;
 
-@RestController
+@RestController("voteControllerV2")
+@RequestMapping("/v2")
 public class VoteController {
 
     @Inject

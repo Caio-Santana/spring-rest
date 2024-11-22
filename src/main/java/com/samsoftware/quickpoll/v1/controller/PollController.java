@@ -1,4 +1,4 @@
-package com.samsoftware.quickpoll.controller;
+package com.samsoftware.quickpoll.v1.controller;
 
 import com.samsoftware.quickpoll.domain.Poll;
 import com.samsoftware.quickpoll.dto.error.ErrorDetail;
@@ -22,7 +22,8 @@ import javax.inject.Inject;
 import java.net.URI;
 import java.util.Optional;
 
-@RestController
+@RestController("pollControllerV1")
+@RequestMapping("/v1")
 public class PollController {
 
     @Inject

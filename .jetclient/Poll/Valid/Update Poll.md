@@ -1,7 +1,7 @@
 ```toml
 name = 'Update Poll'
 method = 'PUT'
-url = 'http://localhost:8080/polls/1'
+url = 'http://localhost:8080/v2/polls/1'
 sortWeight = 5000000
 id = '731c22cc-7081-4405-94d4-e8c3b186be49'
 
