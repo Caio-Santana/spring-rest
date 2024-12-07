@@ -47,4 +47,13 @@ public class Poll {
     public void setOptions(Set<Option> options) {
         this.options = options;
     }
+
+    @Override
+    public String toString() {
+        return "Poll{" +
+                "id=" + id +
+                ", question='" + question + '\'' +
+                ", options=" + options +
+                '}';
+    }
 }
