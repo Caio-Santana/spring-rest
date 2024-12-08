@@ -1,6 +1,7 @@
 package com.samsoftware.quickpoll.v1.controller;
 
 import com.samsoftware.quickpoll.domain.Vote;
+import com.samsoftware.quickpoll.exception.ResourceNotFoundException;
 import com.samsoftware.quickpoll.repository.VoteRepository;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @RestController("voteControllerV1")
 @RequestMapping("/v1")

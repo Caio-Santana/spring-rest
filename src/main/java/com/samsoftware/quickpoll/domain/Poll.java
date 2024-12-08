@@ -3,11 +3,12 @@ package com.samsoftware.quickpoll.domain;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.util.Set;
 
 @Entity
-public class Poll {
+public class Poll extends RepresentationModel<Poll> {
 
     @Id
     @GeneratedValue
@@ -24,11 +25,11 @@ public class Poll {
     @Size(min = 2, max = 6)
     private Set<Option> options;
 
-    public Long getId() {
+    public Long getPollId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setPollId(Long id) {
         this.id = id;
     }
 
@@ -54,6 +55,6 @@ public class Poll {
                 "id=" + id +
                 ", question='" + question + '\'' +
                 ", options=" + options +
-                '}';
+                '}' + '\n' + super.toString() ;
     }
 }

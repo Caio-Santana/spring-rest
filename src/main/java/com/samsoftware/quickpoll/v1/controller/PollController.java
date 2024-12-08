@@ -22,6 +22,9 @@ import javax.inject.Inject;
 import java.net.URI;
 import java.util.Optional;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 @RestController("pollControllerV1")
 @RequestMapping("/v1")
 public class PollController {
@@ -43,6 +46,10 @@ public class PollController {
     @GetMapping("/polls")
     public ResponseEntity<Iterable<Poll>> getAllPolls() {
         Iterable<Poll> allPolls = pollRepository.findAll();
+        for (Poll p : allPolls) {
+            updatePollResourceWithLinks(p);
+        }
+
 //        return new ResponseEntity<>(allPolls, HttpStatus.OK);
         return ResponseEntity.ok(allPolls);
     }
@@ -73,7 +80,7 @@ public class PollController {
         URI newPollUri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(poll.getId())
+                .buildAndExpand(poll.getPollId())
                 .toUri();
 
         HttpHeaders responseHeaders = new HttpHeaders();
@@ -105,7 +112,9 @@ public class PollController {
                     required = true
             ) @PathVariable Long pollId
     ) throws Exception {
-        return ResponseEntity.ok(verifiyPoll(pollId));
+        Poll poll = verifiyPoll(pollId);
+        updatePollResourceWithLinks(poll);
+        return ResponseEntity.ok(poll);
     }
 
     @PutMapping("/polls/{pollId}")
@@ -128,5 +137,11 @@ public class PollController {
             throw new ResourceNotFoundException("Poll with id " + pollId + " not found");
         }
         return poll.get();
+    }
+
+    private void updatePollResourceWithLinks(Poll poll) {
+        poll.add(linkTo(methodOn(PollController.class).getAllPolls()).slash(poll.getPollId()).withSelfRel());
+        poll.add(linkTo(methodOn(VoteController.class).getAllVotes(poll.getPollId())).withSelfRel());
+        poll.add(linkTo(methodOn(ComputeResultController.class).computeResult(poll.getPollId())).withRel("compute-result"));
     }
 }

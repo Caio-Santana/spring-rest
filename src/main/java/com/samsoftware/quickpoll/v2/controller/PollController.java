@@ -75,7 +75,7 @@ public class PollController {
         URI newPollUri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(poll.getId())
+                .buildAndExpand(poll.getPollId())
                 .toUri();
 
         HttpHeaders responseHeaders = new HttpHeaders();
